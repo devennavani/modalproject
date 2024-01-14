@@ -40,9 +40,9 @@ jobs:
 
       - name: Create and Set Modal Environment
         run: |
-          ENV_NAME=${{ steps.set_env_name.outputs.env_name }}          
+          ENV_NAME=${{ steps.set_env_name.outputs.env_name }}        
           set +e  # Disable immediate exit on error
-          echo "Creating environment '$ENV_NAME' if it doesn't already exist..."
+          echo "Creating Modal environment '$ENV_NAME' if it doesn't already exist..."
           CREATE_OUTPUT=$(modal environment create $ENV_NAME 2>&1)
           CREATE_EXIT_CODE=$?
           set -e  # Re-enable immediate exit on error
