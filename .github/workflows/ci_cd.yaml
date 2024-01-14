@@ -50,6 +50,7 @@ jobs:
           echo "Create command output: $CREATE_OUTPUT"
 
           if [ $CREATE_EXIT_CODE -ne 0 ]; then
+            echo "Create command output: $CREATE_OUTPUT"
             if [[ "$CREATE_OUTPUT" == *"AuthError"* ]]; then
               echo "Authentication error occurred. Exiting."
               exit 1
