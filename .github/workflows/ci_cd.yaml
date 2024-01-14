@@ -43,7 +43,13 @@ jobs:
           ENV_NAME=${{ steps.set_env_name.outputs.env_name }}
           echo "Attempting to create or set environment: $ENV_NAME"
           
-          (CREATE_OUTPUT=$(modal environment create $ENV_NAME 2>&1); CREATE_EXIT_CODE=$?; echo "Command run complete."; echo "Create command output: $CREATE_OUTPUT"; echo "Create command exit code: $CREATE_EXIT_CODE")
+          set +e  # Disable immediate exit on error
+          CREATE_OUTPUT=$(modal environment create $ENV_NAME 2>&1)
+          CREATE_EXIT_CODE=$?
+          set -e  # Re-enable immediate exit on error
+
+          echo "Create command output: $CREATE_OUTPUT"
+          echo "Create command exit code: $CREATE_EXIT_CODE"
 
           if [ $CREATE_EXIT_CODE -ne 0 ]; then
             echo "An error occurred. Analyzing error..."
