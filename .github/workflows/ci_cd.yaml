@@ -48,13 +48,14 @@ jobs:
           set -e  # Re-enable immediate exit on error
 
           if [ $CREATE_EXIT_CODE -ne 0 ]; then
-            echo "Create command output: $CREATE_OUTPUT"
             if [[ "$CREATE_OUTPUT" == *"AuthError"* ]]; then
+              echo "Create command output: $CREATE_OUTPUT"
               echo "Authentication error occurred. Exiting."
               exit 1
             elif [[ "$CREATE_OUTPUT" == *"<Status.ALREADY_EXISTS: 6>"* ]]; then
               echo "Environment '$ENV_NAME' already exists. Setting it as the current environment."
             else
+              echo "Create command output: $CREATE_OUTPUT"
               echo "An unknown error occurred. Exiting."
               exit 1
             fi
@@ -62,9 +63,9 @@ jobs:
             echo "Environment '$ENV_NAME' created successfully."
           fi
 
-          echo "Setting Modal environment..."
+          echo "Setting Modal environment to '$ENV_NAME'..."
           modal config set-environment $ENV_NAME
-          echo "Environment '$ENV_NAME' is now set as the current environment."
+          echo "Environment '$ENV_NAME' is now set as the current Modal environment."
 
       - name: Deploy job
         run: |
