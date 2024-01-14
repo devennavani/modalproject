@@ -53,7 +53,15 @@ jobs:
 
           if [ $CREATE_EXIT_CODE -ne 0 ]; then
             echo "An error occurred. Analyzing error..."
-            # Further analysis and handling of the error can be done here
+            if [[ "$CREATE_OUTPUT" == *"AuthError"* ]]; then
+              echo "Authentication error occurred. Exiting."
+              exit 1
+            elif [[ "$CREATE_OUTPUT" == *"<Status.ALREADY_EXISTS: 6>"* ]]; then
+              echo "Environment '$ENV_NAME' already exists. Setting it as the current environment."
+            else
+              echo "An unknown error occurred. Exiting."
+              exit 1
+            fi
           else
             echo "Environment '$ENV_NAME' created successfully."
           fi
