@@ -47,8 +47,6 @@ jobs:
           CREATE_EXIT_CODE=$?
           set -e  # Re-enable immediate exit on error
 
-          echo "Create command output: $CREATE_OUTPUT"
-
           if [ $CREATE_EXIT_CODE -ne 0 ]; then
             echo "Create command output: $CREATE_OUTPUT"
             if [[ "$CREATE_OUTPUT" == *"AuthError"* ]]; then
