@@ -1,0 +1,58 @@
+# Adapted from https://modal.com/docs/guide/continuous-deployment
+
+name: CI/CD
+
+on:
+  push:
+    branches:
+      - main
+
+  pull_request:
+
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    env:
+      MODAL_TOKEN_ID: ${{ secrets.MODAL_TOKEN_ID }}
+      MODAL_TOKEN_SECRET: ${{ secrets.MODAL_TOKEN_SECRET }}
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install Modal
+        run: |
+          python -m pip install --upgrade pip
+          pip install modal
+
+      - name: Determine Modal Environment Name
+        id: set_env_name
+        run: |
+          if [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "::set-output name=env_name::dev"
+          else
+            echo "::set-output name=env_name::pr${{ github.event.pull_request.number }}"
+          fi
+
+      - name: Create and Set Modal Environment
+        run: |
+          ENV_NAME=${{ steps.set_env_name.outputs.env_name }}
+          set +e
+          modal environment create $ENV_NAME
+          if [ $? -ne 0 ]; then
+            echo "Modal environment '$ENV_NAME' already exists. Setting it as the current environment."
+          else
+            echo "Modal environment '$ENV_NAME' created successfully."
+          fi
+          modal config set-environment $ENV_NAME
+          echo "Environment '$ENV_NAME' is now set as the current Modal environment."
+
+      - name: Deploy job
+        run: |
+          modal deploy my_package.my_file
