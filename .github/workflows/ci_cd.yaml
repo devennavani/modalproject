@@ -53,20 +53,20 @@ jobs:
               echo "Authentication error occurred. Exiting."
               exit 1
             elif [[ "$CREATE_OUTPUT" == *"<Status.ALREADY_EXISTS: 6>"* ]]; then
-              echo "Environment '$ENV_NAME' already exists. Setting it as the current environment."
+              echo "Modal environment '$ENV_NAME' already exists. Setting it as the current environment."
             else
               echo "Create command output: $CREATE_OUTPUT"
               echo "An unknown error occurred. Exiting."
               exit 1
             fi
           else
-            echo "Environment '$ENV_NAME' created successfully."
+            echo "Modal environment '$ENV_NAME' created successfully."
           fi
 
           echo "Setting Modal environment to '$ENV_NAME'..."
           modal config set-environment $ENV_NAME
           echo "Environment '$ENV_NAME' is now set as the current Modal environment."
 
-      - name: Deploy job
-        run: |
-          modal deploy my_package.my_file
+      # - name: Deploy Modal stub as an application
+      #   run: |
+      #     modal deploy my_package.my_file
