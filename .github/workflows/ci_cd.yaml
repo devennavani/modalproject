@@ -41,22 +41,21 @@ jobs:
       - name: Create and Set Modal Environment
         run: |
           ENV_NAME=${{ steps.set_env_name.outputs.env_name }}
+          echo "Attempting to create or set environment: $ENV_NAME"
+          
           CREATE_OUTPUT=$(modal environment create $ENV_NAME 2>&1)
           CREATE_EXIT_CODE=$?
+          
+          echo "Create command output: $CREATE_OUTPUT"
+          echo "Create command exit code: $CREATE_EXIT_CODE"
+
           if [ $CREATE_EXIT_CODE -ne 0 ]; then
-            echo "$CREATE_OUTPUT"
-            if [[ "$CREATE_OUTPUT" == *"AuthError"* ]]; then
-              echo "Authentication error occurred. Exiting."
-              exit 1
-            elif [[ "$CREATE_OUTPUT" == *"<Status.ALREADY_EXISTS: 6>"* ]]; then
-              echo "Environment '$ENV_NAME' already exists. Setting it as the current environment."
-            else
-              echo "An unknown error occurred. Exiting."
-              exit 1
-            fi
+            echo "An error occurred. Exiting."
+            exit 1
           else
             echo "Environment '$ENV_NAME' created successfully."
           fi
+
           modal config set-environment $ENV_NAME
           echo "Environment '$ENV_NAME' is now set as the current environment."
 
