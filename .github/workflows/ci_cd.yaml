@@ -67,6 +67,6 @@ jobs:
           modal config set-environment $ENV_NAME
           echo "Environment '$ENV_NAME' is now set as the current Modal environment."
 
-      # - name: Deploy Modal stub as an application
-      #   run: |
-      #     modal deploy my_package.my_file
+      - name: Deploy Modal stub as an application
+        run: |
+          modal deploy backend.api

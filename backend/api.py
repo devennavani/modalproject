@@ -4,7 +4,7 @@ from fastapi.responses import HTMLResponse
 from modal import Image, Stub, asgi_app
 
 web_app = FastAPI()
-stub = Stub()
+stub = Stub("api")
 
 image = Image.debian_slim().pip_install("boto3")
 
