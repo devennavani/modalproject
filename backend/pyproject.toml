@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "modalproject"
+version = "0.1.0"
+description = "Sample Modal project"
+repository = "https://github.com/devennavani/modalproject"
+authors = []
+
+[tool.poetry.dependencies]
+python = ">3.9,<3.10"
+modal = "^0.56.4620"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
