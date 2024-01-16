@@ -166,3 +166,5 @@ frontend/.DS_Store
 frontend/env
 # Created via `npm run build`
 frontend/.next
+
+backend/.DS_Store
