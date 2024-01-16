@@ -162,3 +162,7 @@ cython_debug/
 # Frontend
 frontend/node_modules/
 frontend/.DS_Store
+# Created by `nodeenv`
+frontend/env
+# Created via `npm run build`
+frontend/.next
