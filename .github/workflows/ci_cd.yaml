@@ -30,8 +30,8 @@ jobs:
           version: 1.7.1
         
       - name: Install Poetry Dependencies
+        working-directory: ./backend
         run: |
-          cd backend
           poetry install --no-interaction --no-root
 
       - name: Determine Modal Environment Name
@@ -44,6 +44,7 @@ jobs:
           fi
 
       - name: Create and Set Modal Environment
+        working-directory: ./backend
         run: |
           ENV_NAME=${{ steps.set_env_name.outputs.env_name }}        
           set +e  # Disable immediate exit on error
@@ -73,5 +74,6 @@ jobs:
           echo "Environment '$ENV_NAME' is now set as the current Modal environment."
 
       - name: Deploy Modal stub as an application
+        working-directory: ./backend
         run: |
           poetry run modal deploy backend.api
