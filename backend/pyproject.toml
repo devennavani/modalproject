@@ -8,6 +8,7 @@ authors = []
 [tool.poetry.dependencies]
 python = ">3.9,<3.10"
 modal = "^0.56.4620"
+strawberry-graphql = {extras = ["debug-server", "fastapi"], version = "^0.217.1"}
 
 
 [build-system]
