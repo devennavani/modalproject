@@ -1,3 +1,5 @@
+"use client";
+
 import { useGetBooksQuery } from '@/graphql/queries/Books.queries'
 import Image from 'next/image'
 
