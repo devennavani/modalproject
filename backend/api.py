@@ -1,23 +1,12 @@
-from fastapi import FastAPI, Request
-from fastapi.responses import HTMLResponse
+from fastapi import FastAPI
 from modal import Image, Stub, asgi_app
+from .graphql_router import graphql_router
 
 web_app = FastAPI()
+web_app.include_router(graphql_router)
+
 stub = Stub("api")
-
 image = Image.debian_slim().pip_install("boto3")
-
-
-@web_app.post("/foo")
-async def foo(request: Request):
-    body = await request.json()
-    return body
-
-
-@web_app.get("/bar")
-async def bar(arg="world"):
-    return HTMLResponse(f"<h1>Hello Fast {arg}!</h1>")
-
 
 @stub.function(image=image)
 @asgi_app()
