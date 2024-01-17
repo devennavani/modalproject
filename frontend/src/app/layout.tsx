@@ -1,10 +1,7 @@
-"use client";
-
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import { ApolloProvider } from '@apollo/client'
-import client from '../graphql/apolloClient'
+import { Providers } from './providers'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,9 +17,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <ApolloProvider client={client}>
-        <body className={inter.className}>{children}</body>
-      </ApolloProvider>
+      <Providers><body className={inter.className}>{children}</body></Providers>
     </html>
   )
 }
