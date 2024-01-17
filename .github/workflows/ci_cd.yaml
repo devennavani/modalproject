@@ -33,7 +33,7 @@ jobs:
         run: |
           cd backend
           poetry install --no-interaction --no-root
-          poetry shell
+          poetry shell --no-interaction
 
       - name: Determine Modal Environment Name
         id: set_env_name
