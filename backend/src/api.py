@@ -6,7 +6,7 @@ web_app = FastAPI()
 web_app.include_router(graphql_router)
 
 stub = Stub("api")
-image = Image.debian_slim().pip_install("boto3")
+image = Image.debian_slim().pip_install("strawberry-graphql[debug-server,fastapi]>=0.217.1,<1.0.0")
 
 @stub.function(image=image)
 @asgi_app()
