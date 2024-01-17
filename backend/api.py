@@ -1,6 +1,5 @@
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
-
 from modal import Image, Stub, asgi_app
 
 web_app = FastAPI()
