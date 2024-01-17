@@ -1,6 +1,6 @@
 import { ApolloClient, InMemoryCache } from '@apollo/client';
 
-const VERCEL_GIT_PULL_REQUEST_ID = process.env.VERCEL_GIT_PULL_REQUEST_ID;
+const VERCEL_GIT_PULL_REQUEST_ID = process.env.VERCEL_GIT_COMMIT_REF;
 console.log('VERCEL_GIT_PULL_REQUEST_ID', VERCEL_GIT_PULL_REQUEST_ID);
 const MODAL_ENVIRONMENT_NAME = VERCEL_GIT_PULL_REQUEST_ID ? `pr${VERCEL_GIT_PULL_REQUEST_ID}` : 'dev';
 const client = new ApolloClient({
