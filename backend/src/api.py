@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from modal import Image, Stub, asgi_app
-from backend.graphql_router import graphql_router
+from src.graphql_router import graphql_router
 
 web_app = FastAPI()
 web_app.include_router(graphql_router)
