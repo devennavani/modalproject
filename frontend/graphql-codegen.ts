@@ -4,12 +4,13 @@ const config: CodegenConfig = {
   overwrite: true,
   silent: false,
   schema: "src/graphql/__generated__/schema.graphql",
-  documents: ["src/**/*.queries.ts"],
+  documents: ["src/graphql/**/*.queries.ts"],
   generates: {
     "./src/graphql/__generated__/types.ts": {
       plugins: ["typescript", "typescript-operations"],
     },
   },
+  ignoreNoDocuments: true,
 };
 
 export default config;
