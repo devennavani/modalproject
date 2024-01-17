@@ -29,11 +29,10 @@ jobs:
         with:
           version: 1.7.1
         
-      - name: Install Poetry Dependencies and enter Virtual Environment
+      - name: Install Poetry Dependencies
         run: |
           cd backend
           poetry install --no-interaction --no-root
-          source $(poetry env info --path)/bin/activate
 
       - name: Determine Modal Environment Name
         id: set_env_name
@@ -49,7 +48,7 @@ jobs:
           ENV_NAME=${{ steps.set_env_name.outputs.env_name }}        
           set +e  # Disable immediate exit on error
           echo "Creating Modal environment '$ENV_NAME' if it doesn't already exist..."
-          CREATE_OUTPUT=$(modal environment create $ENV_NAME 2>&1)
+          CREATE_OUTPUT=$(poetry run modal environment create $ENV_NAME 2>&1)
           CREATE_EXIT_CODE=$?
           set -e  # Re-enable immediate exit on error
 
@@ -70,9 +69,9 @@ jobs:
           fi
 
           echo "Setting Modal environment to '$ENV_NAME'..."
-          modal config set-environment $ENV_NAME
+          poetry run modal config set-environment $ENV_NAME
           echo "Environment '$ENV_NAME' is now set as the current Modal environment."
 
       - name: Deploy Modal stub as an application
         run: |
-          modal deploy backend.api
+          poetry run modal deploy backend.api
