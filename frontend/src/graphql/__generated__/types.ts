@@ -24,3 +24,8 @@ export type Query = {
   __typename?: 'Query';
   books: Array<Book>;
 };
+
+export type GetBooksQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetBooksQuery = { __typename?: 'Query', books: Array<{ __typename?: 'Book', title: string, author: string }> };
