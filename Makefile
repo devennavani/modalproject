@@ -2,15 +2,17 @@
 #### Python targets ####
 ########################
 
+# Needed to install Poetry (see below)
 install_pipx:
 	brew install pipx
 	pipx ensurepath
 
 install_poetry:
 	pipx install --suffix=@1.7.1 poetry==1.7.1
+	poetry@1.7.1 --version
 
 ## This can be run outside of the Python virtual environment ##
-py_reqs: # Install Python requirements (enter shell via "poetry@1.7.1 shell")
+py_reqs: # Install Python requirements (afterwards, enter shell via "poetry@1.7.1 shell")
 	( \
 		cd backend && \
 		poetry@1.7.1 install --no-root \
@@ -40,7 +42,7 @@ create_nenv: # Create Node virtual environment (enter via ". env/bin/activate")
 
 ## Run this target inside the Python virtual environment ##
 graphql-schema: ## Codegen GraphQL schema
-	mkdir -p frontend/src/graphql/__generated__
+	rm -f frontend/src/graphql/__generated__/schema.graphql
 	strawberry export-schema backend.graphql.schema:schema > frontend/src/graphql/__generated__/schema.graphql
 
 ## Run this target inside the Node virtual environment ##
@@ -55,7 +57,7 @@ graphql-client: ## Codegen client GraphQL types
 ########################
 
 ## Run this target inside the Python virtual environment ##
-%.api: ## Run API in dev mode in provided Modal environment
+%.api: ## Run API in dev mode in provided Modal environment (nominally the one tied to the PR of the branch you're working on)
 	( \
 		cd backend && \
 		MODAL_ENVIRONMENT="$*" modal serve src.api \

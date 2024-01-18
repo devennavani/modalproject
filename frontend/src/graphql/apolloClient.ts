@@ -2,6 +2,7 @@ import { ApolloClient, InMemoryCache } from '@apollo/client';
 import 'dotenv/config'
 
 const getApiUrl = () => {
+  // Should only be present when running UI locally
   if (process.env.NEXT_PUBLIC_MODAL_ENVIRONMENT) {
     // This assumes you are running your API via `model serve` in the MODAL_ENVIRONMENT environment
     return `https://devennavani-${process.env.NEXT_PUBLIC_MODAL_ENVIRONMENT}--api-fastapi-app-dev.modal.run/graphql`;
