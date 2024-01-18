@@ -1,4 +1,4 @@
-from src.common import stub
+from src.api.app import stub
 
 @stub.function()
 def square(num: int):
