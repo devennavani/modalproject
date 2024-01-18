@@ -10,7 +10,7 @@ web_app = FastAPI()
 origins = ["*"]
 web_app.add_middleware(
     CORSMiddleware,
-    allow_origins=origins,  # List of allowed origins
+    allow_origin_regex='https://modalproject-.*\.vercel\.app',
     allow_credentials=True,  # This allows cookies and credentials to be sent along with the requests.
     allow_methods=["*"],  # Allows all methods
     allow_headers=["*"],  # Allows all headers
