@@ -6,7 +6,7 @@ This Python backend is predominantly a FastAPI API, accompanied by some example 
 
 The frontend is a NextJS app, using ReactJS, Typescript, and TailwindCSS. It's hosted on Vercel, at [https://modalproject.vercel.app](https://modalproject.vercel.app).
 
-The project uses GraphQL for the API, with Strawberry GraphQL on the backend and Apollo Client on the frontend.
+The project uses GraphQL for the API, with [Strawberry GraphQL](https://strawberry.rocks/) on the backend and [Apollo Client](https://www.apollographql.com/docs/react) on the frontend.
 
 ## Dev Setup
 
@@ -30,11 +30,21 @@ Finally, run `. env/bin/activate` to enter the virtual environment.
 
 Then, run `npm install` to install the NodeJS dependencies.
 
+### GraphQL codegen
+
+Run `make graphql-schema` to generate the GraphQL schema from the backend. This will create a `schema.graphql` file in `frontend/src/graphql/__generated__`.
+
+Run `make graphql-client` to generate TypeScript types for the GraphQL client. This will create a `types.ts` file in `frontend/src/graphql/__generated__`.
+
 ## CI/CD
 
-This project includes a CI/CD GitHub workflow that runs on every push to the `main` branch, as well as every push to a pull request's branch.
+This project includes a CI/CD GitHub workflow that runs on a PR branch when you open a PR, as well as push to the PR branch. It also runs on the `main` branch when you merge a PR into `main`.
 
-For PRs, it will create a [Modal environment(https://modal.com/docs/guide/environments) for the PR, and deploy the Modal stub to that environment. For 
+The workflow will create a [Modal environment](https://modal.com/docs/guide/environments) (named `dev` if for `main`, or `pr{PR_NUMBER}` if for a PR) if it doesn't already exist and deploy the modal stub (via `modal deploy`) to that environment.
+
+Having 1 Modal environment per PR allows you to test your changes in an isolated, production-like environment before merging your PR into `main`.
+
+For this workflow to work, you need to add `MODAL_TOKEN_ID` and `MODAL_TOKEN_SECRET` secrets to your GitHub repository.
 
 ## Developing Locally
 
