@@ -1,6 +1,6 @@
 """Module containing the FastAPI app."""
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from starlette.middleware.cors import CORSMiddleware
 from modal import Image, asgi_app
 from src.api.graphql_router import graphql_router
 from src.common import stub
