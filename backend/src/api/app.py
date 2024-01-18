@@ -3,7 +3,6 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from modal import Image, Stub, asgi_app
 from src.api.graphql_router import graphql_router
-from src.common import modal_stub
 
 # Construct FastAPI app
 web_app = FastAPI()
