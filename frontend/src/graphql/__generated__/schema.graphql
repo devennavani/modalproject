@@ -1,8 +1,4 @@
-type Book {
-  title: String!
-  author: String!
-}
-
 type Query {
-  books: [Book!]!
+  square(num: Int!): Int!
+  squareMap(nums: [Int!]!): [Int!]!
 }
