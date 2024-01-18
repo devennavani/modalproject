@@ -73,7 +73,8 @@ jobs:
           poetry run modal config set-environment $ENV_NAME
           echo "Environment '$ENV_NAME' is now set as the current Modal environment."
 
-      - name: Deploy Modal stub as an application
+      - name: Deploy Modal stubs as applications
         working-directory: ./backend
         run: |
           poetry run modal deploy src.api.app
+          poetry run modal deploy src.modal_functions.functions
