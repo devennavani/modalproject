@@ -60,5 +60,5 @@ graphql-client: ## Codegen client GraphQL types
 %.api: ## Run API in dev mode in provided Modal environment (nominally the one tied to the PR of the branch you're working on)
 	( \
 		cd backend && \
-		MODAL_ENVIRONMENT="$*" modal serve src.api \
+		MODAL_ENVIRONMENT="$*" modal serve src.api.app \
 	)
