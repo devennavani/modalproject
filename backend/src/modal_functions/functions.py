@@ -1,6 +1,4 @@
-from modal import Stub
-
-stub = Stub("functions")
+from src.common import stub
 
 @stub.function()
 def square(num: int):
