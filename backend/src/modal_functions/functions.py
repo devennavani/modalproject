@@ -1,8 +1,6 @@
-from modal import Stub
+from src.common import modal_stub
 
-stub = Stub("functions")
-
-@stub.function()
+@modal_stub.function()
 def square(num: int):
     return num ** 2
 
