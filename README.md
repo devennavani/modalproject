@@ -54,4 +54,4 @@ Run `make {MODAL_ENVIRONMENT}.api` to start the FastAPI server in development mo
 
 ### Frontend
 
-Once you have the FastAPI server running in development mode, run `make {MODAL_ENVIRONMENT}.ui` to run the UI locally. This will point the UI to the FastAPI server running in development mode.
+Once you have the FastAPI server running in development mode, run `make {MODAL_ENVIRONMENT}.ui` to run the UI locally. This will point the UI to the FastAPI server running in development mode in `MODAL_ENVIRONMENT`.
