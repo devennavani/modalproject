@@ -30,7 +30,8 @@ create_nenv: # Create Node virtual environment (enter via ". env/bin/activate")
 %.ui: ## Run UI locally and point to dev-mode API (see %.api Makefile target) in provided Modal environment
 	( \
 		cd frontend && \
-		MODAL_ENVIRONMENT="$*" npm run dev \
+		echo "\nNEXT_PUBLIC_MODAL_ENVIRONMENT=$*" >> .env.local && \
+		npm run dev \
 	)
 
 ########################
