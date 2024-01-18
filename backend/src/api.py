@@ -4,7 +4,7 @@ from modal import Image, Stub, asgi_app
 from src.graphql_router import graphql_router
 
 web_app = FastAPI()
-origins = ["https://modalproject.vercel.app"]
+origins = ["*"]
 web_app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,  # List of allowed origins
