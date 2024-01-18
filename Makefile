@@ -41,3 +41,14 @@ graphql-client: ## Codegen client GraphQL types
 		cd frontend && \
 		npm run graphql-codegen \
 	)
+
+########################
+#### Modal targets #####
+########################
+
+## Run this target inside the Python virtual environment ##
+%.api: ## Run API in dev mode in provided Modal environment
+	( \
+		cd backend && \
+		MODAL_ENVIRONMENT="$*" modal serve src.api \
+	)
