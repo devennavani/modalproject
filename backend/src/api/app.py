@@ -7,6 +7,7 @@ from src.common import stub
 
 # Construct FastAPI app
 web_app = FastAPI()
+web_app.include_router(graphql_router)
 origins = ["*"]
 web_app.add_middleware(
     CORSMiddleware,
@@ -15,7 +16,6 @@ web_app.add_middleware(
     allow_methods=["*"],  # Allows all methods
     allow_headers=["*"],  # Allows all headers
 )
-web_app.include_router(graphql_router)
 
 # TODO: Construct Modal image directly from pyproject.toml
 image = Image.debian_slim().pip_install("strawberry-graphql[debug-server,fastapi]>=0.217.1,<1.0.0")
