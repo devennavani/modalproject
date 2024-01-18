@@ -1,5 +1,6 @@
+"""Module containing /graphql FastAPI router."""
 from strawberry.fastapi import GraphQLRouter
-from src.graphql.schema import schema
+from src.api.graphql.schema import schema
 
 graphql_router = GraphQLRouter(
     schema=schema,

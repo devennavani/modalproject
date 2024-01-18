@@ -1,8 +1,10 @@
+"""Module containing the FastAPI app."""
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from modal import Image, Stub, asgi_app
-from src.graphql_router import graphql_router
+from src.api.graphql_router import graphql_router
 
+# Construct FastAPI app
 web_app = FastAPI()
 origins = ["*"]
 web_app.add_middleware(
@@ -15,6 +17,7 @@ web_app.add_middleware(
 web_app.include_router(graphql_router)
 
 stub = Stub("api")
+# TODO: Construct Modal image directly from pyproject.toml
 image = Image.debian_slim().pip_install("strawberry-graphql[debug-server,fastapi]>=0.217.1,<1.0.0")
 
 @stub.function(image=image)
