@@ -26,6 +26,13 @@ create_nenv: # Create Node virtual environment (enter via ". env/bin/activate")
 		nodeenv env --node=20.11.0 \
 	)
 
+## Run this target inside the Node virtual environment ##
+%.ui: ## Run UI locally and point to dev-mode API (see %.api Makefile target) in provided Modal environment
+	( \
+		cd frontend && \
+		MODAL_ENVIRONMENT="$*" npm run dev \
+	)
+
 ########################
 #### GraphQL targets ###
 ########################
