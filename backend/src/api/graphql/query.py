@@ -1,19 +1,14 @@
-import strawberry
 from typing import List
-
-@strawberry.type
-class Book:
-    title: str
-    author: str
-
-def get_books():
-    return [
-        Book(
-            title="The Great Gatsby",
-            author="F. Scott Fitzgerald",
-        ),
-    ]
+import strawberry
+from src.modal_functions.functions import square
 
 @strawberry.type
 class Query:
-    books: List[Book] = strawberry.field(resolver=get_books)
+
+    @strawberry.field
+    def square(self, num: int) -> int:
+        return square.remote(num)
+    
+    @strawberry.field
+    def square_map(self, nums: List[int]) -> List[int]:
+        return square.map(nums)
