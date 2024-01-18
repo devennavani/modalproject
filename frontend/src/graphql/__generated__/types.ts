@@ -14,18 +14,26 @@ export type Scalars = {
   Float: { input: number; output: number; }
 };
 
-export type Book = {
-  __typename?: 'Book';
-  author: Scalars['String']['output'];
-  title: Scalars['String']['output'];
-};
-
 export type Query = {
   __typename?: 'Query';
-  books: Array<Book>;
+  square: Scalars['Int']['output'];
+  squareMap: Array<Scalars['Int']['output']>;
 };
 
-export type GetBooksQueryVariables = Exact<{ [key: string]: never; }>;
+
+export type QuerySquareArgs = {
+  num: Scalars['Int']['input'];
+};
 
 
-export type GetBooksQuery = { __typename?: 'Query', books: Array<{ __typename?: 'Book', title: string, author: string }> };
+export type QuerySquareMapArgs = {
+  nums: Array<Scalars['Int']['input']>;
+};
+
+export type SampleQueryVariables = Exact<{
+  num: Scalars['Int']['input'];
+  nums: Array<Scalars['Int']['input']> | Scalars['Int']['input'];
+}>;
+
+
+export type SampleQuery = { __typename?: 'Query', square: number, squareMap: Array<number> };

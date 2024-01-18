@@ -1,1 +1,4 @@
-Error: No module named 'src'
+type Query {
+  square(num: Int!): Int!
+  squareMap(nums: [Int!]!): [Int!]!
+}

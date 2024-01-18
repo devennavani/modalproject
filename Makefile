@@ -43,7 +43,11 @@ create_nenv: # Create Node virtual environment (enter via ". env/bin/activate")
 ## Run this target inside the Python virtual environment ##
 graphql-schema: ## Codegen GraphQL schema
 	rm -f frontend/src/graphql/__generated__/schema.graphql
-	strawberry export-schema backend.src.api.graphql.schema:schema > frontend/src/graphql/__generated__/schema.graphql
+	( \
+		cd backend && \
+		strawberry export-schema src.api.graphql.schema:schema > ../frontend/src/graphql/__generated__/schema.graphql \
+	)
+	
 
 ## Run this target inside the Node virtual environment ##
 graphql-client: ## Codegen client GraphQL types
