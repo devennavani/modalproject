@@ -76,4 +76,4 @@ jobs:
       - name: Deploy Modal stubs as applications
         working-directory: ./backend
         run: |
-          poetry run modal deploy src
+          poetry run modal deploy src.common
